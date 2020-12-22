@@ -1,0 +1,137 @@
+
+application {
+  config {
+    baseName classschedule,
+    applicationType monolith,
+    packageName com.dd,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    clientFramework react
+  }
+  entities *
+}
+
+entity Student {
+schoolYear String,
+firstName String,
+lastName String,
+email String,
+phone String,
+createdBy String,
+created Instant,
+updated Instant
+}
+
+entity Parent {
+firstName String,
+lastName String,
+email String,
+phone String,
+createdBy String,
+created Instant,
+updated Instant
+}
+
+entity UserExtra {
+userType String
+}
+
+
+
+entity  Teacher {
+profileContent String,
+firstName String,
+lastName String,
+email String,
+phone String,
+createdBy String,
+created Instant,
+updated Instant
+}
+
+entity Course {
+  name String,
+  created Instant,
+  updated Instant
+}
+
+
+entity Invite {
+  requestedUserId String,
+  invitedUserId String,
+  createdBy String,
+  created Instant,
+  updated Instant
+}
+
+//Code	Meaning
+//0	Pending
+//1	Accepted
+//2	Declined
+//3	Blocked
+
+entity InviteStatus{
+
+	statusCode Integer,
+	status String
+}
+
+entity ClassSchedule{
+name String,
+created Instant,
+updated Instant,
+createdBy String,
+updatedBy String,
+confirmedByStudent String,
+confirmedByTeacher String,
+comment String,
+connected Boolean
+}
+
+
+entity Notification{
+type String,
+channel String,
+recipient String,
+sendDate Instant
+}
+
+relationship OneToOne {
+Student{user(email)} to User
+UserExtra{user(email)} to User
+}
+
+relationship OneToOne {
+Parent{user(email)} to User
+}
+
+relationship OneToOne {
+Teacher{user(email)} to User
+}
+
+relationship ManyToOne {
+ClassSchedule {student}  to Student
+ClassSchedule {teacher} to Teacher
+ClassSchedule {parent} to  Parent
+ClassSchedule {course(name)} to Course
+Invite {invitestatus(status)} to InviteStatus
+Student {parent(firstName)} to Parent
+Student {Teacher(firstName)} to Teacher
+Teacher {parent(firstName)} to Parent
+Teacher {Student(firstName)} to Student
+
+}
+
+
+relationship ManyToOne {
+Notification{User(email)} to User
+}
+
+paginate * with pagination
+filter *
+
+service all with serviceImpl
+
+
+     
+

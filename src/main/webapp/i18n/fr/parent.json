@@ -1,0 +1,29 @@
+{
+  "classscheduleApp": {
+    "parent": {
+      "home": {
+        "title": "Parents",
+        "createLabel": "Créer un nouveau Parent",
+        "createOrEditLabel": "Créer ou éditer un Parent",
+        "notFound": "Aucun Parent trouvé"
+      },
+      "created": "Un nouveau Parent a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Parent avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Parent avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Parent {{ id }} ?"
+      },
+      "detail": {
+        "title": "Parent"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "createdBy": "Created By",
+      "created": "Created",
+      "updated": "Updated",
+      "user": "User"
+    }
+  }
+}

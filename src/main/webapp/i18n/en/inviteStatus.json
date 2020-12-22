@@ -1,0 +1,23 @@
+{
+  "classscheduleApp": {
+    "inviteStatus": {
+      "home": {
+        "title": "Invite Statuses",
+        "createLabel": "Create a new Invite Status",
+        "createOrEditLabel": "Create or edit a Invite Status",
+        "notFound": "No Invite Statuses found"
+      },
+      "created": "A new Invite Status is created with identifier {{ param }}",
+      "updated": "A Invite Status is updated with identifier {{ param }}",
+      "deleted": "A Invite Status is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invite Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Invite Status"
+      },
+      "statusCode": "Status Code",
+      "status": "Status"
+    }
+  }
+}

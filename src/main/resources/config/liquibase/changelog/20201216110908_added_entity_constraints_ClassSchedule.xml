@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ClassSchedule.
+    -->
+    <changeSet id="20201216110908-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="class_schedule"
+                                 constraintName="fk_class_schedule_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
+
+        <addForeignKeyConstraint baseColumnNames="teacher_id"
+                                 baseTableName="class_schedule"
+                                 constraintName="fk_class_schedule_teacher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="class_schedule"
+                                 constraintName="fk_class_schedule_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="parent"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="class_schedule"
+                                 constraintName="fk_class_schedule_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+    </changeSet>
+</databaseChangeLog>

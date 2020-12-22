@@ -1,0 +1,27 @@
+{
+  "classscheduleApp": {
+    "invite": {
+      "home": {
+        "title": "Invites",
+        "createLabel": "Create a new Invite",
+        "createOrEditLabel": "Create or edit a Invite",
+        "notFound": "No Invites found"
+      },
+      "created": "A new Invite is created with identifier {{ param }}",
+      "updated": "A Invite is updated with identifier {{ param }}",
+      "deleted": "A Invite is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invite {{ id }}?"
+      },
+      "detail": {
+        "title": "Invite"
+      },
+      "requestedUserId": "Requested User Id",
+      "invitedUserId": "Invited User Id",
+      "createdBy": "Created By",
+      "created": "Created",
+      "updated": "Updated",
+      "invitestatus": "Invitestatus"
+    }
+  }
+}

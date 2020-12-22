@@ -1,0 +1,45 @@
+{
+  "name": "Invite",
+  "fields": [
+    {
+      "fieldName": "requestedUserId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "invitedUserId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updated",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "inviteStatus",
+      "otherEntityRelationshipName": "invite",
+      "relationshipName": "invitestatus",
+      "otherEntityField": "status"
+    }
+  ],
+  "changelogDate": "20201216110708",
+  "entityTableName": "invite",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["classschedule"]
+}

@@ -1,0 +1,34 @@
+{
+  "classscheduleApp": {
+    "classSchedule": {
+      "home": {
+        "title": "ClassSchedules",
+        "createLabel": "Créer un nouveau Class Schedule",
+        "createOrEditLabel": "Créer ou éditer un Class Schedule",
+        "notFound": "Aucun Class Schedule trouvé"
+      },
+      "created": "Un nouveau Class Schedule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Class Schedule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Class Schedule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Class Schedule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Class Schedule"
+      },
+      "name": "Name",
+      "created": "Created",
+      "updated": "Updated",
+      "createdBy": "Created By",
+      "updatedBy": "Updated By",
+      "confirmedByStudent": "Confirmed By Student",
+      "confirmedByTeacher": "Confirmed By Teacher",
+      "comment": "Comment",
+      "connected": "Connected",
+      "student": "Student",
+      "teacher": "Teacher",
+      "parent": "Parent",
+      "course": "Course"
+    }
+  }
+}
