@@ -79,13 +79,15 @@ entity InviteStatus{
 entity ClassSchedule{
 name String,
 created Instant,
+schedule Instant,
 updated Instant,
 createdBy String,
 updatedBy String,
 confirmedByStudent String,
 confirmedByTeacher String,
 comment String,
-connected Boolean
+connected Boolean,
+reoccurring Boolean
 }
 
 

@@ -30,6 +30,9 @@ public class ClassSchedule implements Serializable {
     @Column(name = "created")
     private Instant created;
 
+    @Column(name = "schedule")
+    private Instant schedule;
+
     @Column(name = "updated")
     private Instant updated;
 
@@ -50,6 +53,9 @@ public class ClassSchedule implements Serializable {
 
     @Column(name = "connected")
     private Boolean connected;
+
+    @Column(name = "reoccurring")
+    private Boolean reoccurring;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "classSchedules", allowSetters = true)
@@ -100,6 +106,19 @@ public class ClassSchedule implements Serializable {
 
     public void setCreated(Instant created) {
         this.created = created;
+    }
+
+    public Instant getSchedule() {
+        return schedule;
+    }
+
+    public ClassSchedule schedule(Instant schedule) {
+        this.schedule = schedule;
+        return this;
+    }
+
+    public void setSchedule(Instant schedule) {
+        this.schedule = schedule;
     }
 
     public Instant getUpdated() {
@@ -193,6 +212,19 @@ public class ClassSchedule implements Serializable {
         this.connected = connected;
     }
 
+    public Boolean isReoccurring() {
+        return reoccurring;
+    }
+
+    public ClassSchedule reoccurring(Boolean reoccurring) {
+        this.reoccurring = reoccurring;
+        return this;
+    }
+
+    public void setReoccurring(Boolean reoccurring) {
+        this.reoccurring = reoccurring;
+    }
+
     public Student getStudent() {
         return student;
     }
@@ -269,6 +301,7 @@ public class ClassSchedule implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", created='" + getCreated() + "'" +
+            ", schedule='" + getSchedule() + "'" +
             ", updated='" + getUpdated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedBy='" + getUpdatedBy() + "'" +
@@ -276,6 +309,7 @@ public class ClassSchedule implements Serializable {
             ", confirmedByTeacher='" + getConfirmedByTeacher() + "'" +
             ", comment='" + getComment() + "'" +
             ", connected='" + isConnected() + "'" +
+            ", reoccurring='" + isReoccurring() + "'" +
             "}";
     }
 }

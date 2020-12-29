@@ -31,6 +31,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
 
     private InstantFilter created;
 
+    private InstantFilter schedule;
+
     private InstantFilter updated;
 
     private StringFilter createdBy;
@@ -44,6 +46,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
     private StringFilter comment;
 
     private BooleanFilter connected;
+
+    private BooleanFilter reoccurring;
 
     private LongFilter studentId;
 
@@ -60,6 +64,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.created = other.created == null ? null : other.created.copy();
+        this.schedule = other.schedule == null ? null : other.schedule.copy();
         this.updated = other.updated == null ? null : other.updated.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.updatedBy = other.updatedBy == null ? null : other.updatedBy.copy();
@@ -67,6 +72,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.confirmedByTeacher = other.confirmedByTeacher == null ? null : other.confirmedByTeacher.copy();
         this.comment = other.comment == null ? null : other.comment.copy();
         this.connected = other.connected == null ? null : other.connected.copy();
+        this.reoccurring = other.reoccurring == null ? null : other.reoccurring.copy();
         this.studentId = other.studentId == null ? null : other.studentId.copy();
         this.teacherId = other.teacherId == null ? null : other.teacherId.copy();
         this.parentId = other.parentId == null ? null : other.parentId.copy();
@@ -100,6 +106,14 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
 
     public void setCreated(InstantFilter created) {
         this.created = created;
+    }
+
+    public InstantFilter getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(InstantFilter schedule) {
+        this.schedule = schedule;
     }
 
     public InstantFilter getUpdated() {
@@ -158,6 +172,14 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.connected = connected;
     }
 
+    public BooleanFilter getReoccurring() {
+        return reoccurring;
+    }
+
+    public void setReoccurring(BooleanFilter reoccurring) {
+        this.reoccurring = reoccurring;
+    }
+
     public LongFilter getStudentId() {
         return studentId;
     }
@@ -204,6 +226,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(created, that.created) &&
+            Objects.equals(schedule, that.schedule) &&
             Objects.equals(updated, that.updated) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(updatedBy, that.updatedBy) &&
@@ -211,6 +234,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
             Objects.equals(confirmedByTeacher, that.confirmedByTeacher) &&
             Objects.equals(comment, that.comment) &&
             Objects.equals(connected, that.connected) &&
+            Objects.equals(reoccurring, that.reoccurring) &&
             Objects.equals(studentId, that.studentId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(parentId, that.parentId) &&
@@ -223,6 +247,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         id,
         name,
         created,
+        schedule,
         updated,
         createdBy,
         updatedBy,
@@ -230,6 +255,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         confirmedByTeacher,
         comment,
         connected,
+        reoccurring,
         studentId,
         teacherId,
         parentId,
@@ -244,6 +270,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (created != null ? "created=" + created + ", " : "") +
+                (schedule != null ? "schedule=" + schedule + ", " : "") +
                 (updated != null ? "updated=" + updated + ", " : "") +
                 (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
                 (updatedBy != null ? "updatedBy=" + updatedBy + ", " : "") +
@@ -251,6 +278,7 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
                 (confirmedByTeacher != null ? "confirmedByTeacher=" + confirmedByTeacher + ", " : "") +
                 (comment != null ? "comment=" + comment + ", " : "") +
                 (connected != null ? "connected=" + connected + ", " : "") +
+                (reoccurring != null ? "reoccurring=" + reoccurring + ", " : "") +
                 (studentId != null ? "studentId=" + studentId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +

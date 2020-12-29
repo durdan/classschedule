@@ -89,6 +89,9 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                 <th className="hand" onClick={sort('created')}>
                   <Translate contentKey="classscheduleApp.classSchedule.created">Created</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('schedule')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.schedule">Schedule</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('updated')}>
                   <Translate contentKey="classscheduleApp.classSchedule.updated">Updated</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -111,6 +114,9 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                 </th>
                 <th className="hand" onClick={sort('connected')}>
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('reoccurring')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.reoccurring">Reoccurring</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="classscheduleApp.classSchedule.student">Student</Translate> <FontAwesomeIcon icon="sort" />
@@ -140,6 +146,9 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                     {classSchedule.created ? <TextFormat type="date" value={classSchedule.created} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>
+                    {classSchedule.schedule ? <TextFormat type="date" value={classSchedule.schedule} format={APP_DATE_FORMAT} /> : null}
+                  </td>
+                  <td>
                     {classSchedule.updated ? <TextFormat type="date" value={classSchedule.updated} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>{classSchedule.createdBy}</td>
@@ -148,6 +157,7 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                   <td>{classSchedule.confirmedByTeacher}</td>
                   <td>{classSchedule.comment}</td>
                   <td>{classSchedule.connected ? 'true' : 'false'}</td>
+                  <td>{classSchedule.reoccurring ? 'true' : 'false'}</td>
                   <td>{classSchedule.student ? <Link to={`student/${classSchedule.student.id}`}>{classSchedule.student.id}</Link> : ''}</td>
                   <td>{classSchedule.teacher ? <Link to={`teacher/${classSchedule.teacher.id}`}>{classSchedule.teacher.id}</Link> : ''}</td>
                   <td>{classSchedule.parent ? <Link to={`parent/${classSchedule.parent.id}`}>{classSchedule.parent.id}</Link> : ''}</td>

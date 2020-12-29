@@ -44,6 +44,9 @@ public class ClassScheduleResourceIT {
     private static final Instant DEFAULT_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Instant DEFAULT_SCHEDULE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_SCHEDULE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final Instant DEFAULT_UPDATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPDATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -64,6 +67,9 @@ public class ClassScheduleResourceIT {
 
     private static final Boolean DEFAULT_CONNECTED = false;
     private static final Boolean UPDATED_CONNECTED = true;
+
+    private static final Boolean DEFAULT_REOCCURRING = false;
+    private static final Boolean UPDATED_REOCCURRING = true;
 
     @Autowired
     private ClassScheduleRepository classScheduleRepository;
@@ -92,13 +98,15 @@ public class ClassScheduleResourceIT {
         ClassSchedule classSchedule = new ClassSchedule()
             .name(DEFAULT_NAME)
             .created(DEFAULT_CREATED)
+            .schedule(DEFAULT_SCHEDULE)
             .updated(DEFAULT_UPDATED)
             .createdBy(DEFAULT_CREATED_BY)
             .updatedBy(DEFAULT_UPDATED_BY)
             .confirmedByStudent(DEFAULT_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(DEFAULT_CONFIRMED_BY_TEACHER)
             .comment(DEFAULT_COMMENT)
-            .connected(DEFAULT_CONNECTED);
+            .connected(DEFAULT_CONNECTED)
+            .reoccurring(DEFAULT_REOCCURRING);
         return classSchedule;
     }
     /**
@@ -111,13 +119,15 @@ public class ClassScheduleResourceIT {
         ClassSchedule classSchedule = new ClassSchedule()
             .name(UPDATED_NAME)
             .created(UPDATED_CREATED)
+            .schedule(UPDATED_SCHEDULE)
             .updated(UPDATED_UPDATED)
             .createdBy(UPDATED_CREATED_BY)
             .updatedBy(UPDATED_UPDATED_BY)
             .confirmedByStudent(UPDATED_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
-            .connected(UPDATED_CONNECTED);
+            .connected(UPDATED_CONNECTED)
+            .reoccurring(UPDATED_REOCCURRING);
         return classSchedule;
     }
 
@@ -142,6 +152,7 @@ public class ClassScheduleResourceIT {
         ClassSchedule testClassSchedule = classScheduleList.get(classScheduleList.size() - 1);
         assertThat(testClassSchedule.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testClassSchedule.getCreated()).isEqualTo(DEFAULT_CREATED);
+        assertThat(testClassSchedule.getSchedule()).isEqualTo(DEFAULT_SCHEDULE);
         assertThat(testClassSchedule.getUpdated()).isEqualTo(DEFAULT_UPDATED);
         assertThat(testClassSchedule.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testClassSchedule.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
@@ -149,6 +160,7 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(DEFAULT_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testClassSchedule.isConnected()).isEqualTo(DEFAULT_CONNECTED);
+        assertThat(testClassSchedule.isReoccurring()).isEqualTo(DEFAULT_REOCCURRING);
     }
 
     @Test
@@ -184,13 +196,15 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(classSchedule.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
+            .andExpect(jsonPath("$.[*].schedule").value(hasItem(DEFAULT_SCHEDULE.toString())))
             .andExpect(jsonPath("$.[*].updated").value(hasItem(DEFAULT_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)))
             .andExpect(jsonPath("$.[*].confirmedByStudent").value(hasItem(DEFAULT_CONFIRMED_BY_STUDENT)))
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
-            .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())));
+            .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())));
     }
     
     @Test
@@ -206,13 +220,15 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.id").value(classSchedule.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
+            .andExpect(jsonPath("$.schedule").value(DEFAULT_SCHEDULE.toString()))
             .andExpect(jsonPath("$.updated").value(DEFAULT_UPDATED.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY))
             .andExpect(jsonPath("$.confirmedByStudent").value(DEFAULT_CONFIRMED_BY_STUDENT))
             .andExpect(jsonPath("$.confirmedByTeacher").value(DEFAULT_CONFIRMED_BY_TEACHER))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT))
-            .andExpect(jsonPath("$.connected").value(DEFAULT_CONNECTED.booleanValue()));
+            .andExpect(jsonPath("$.connected").value(DEFAULT_CONNECTED.booleanValue()))
+            .andExpect(jsonPath("$.reoccurring").value(DEFAULT_REOCCURRING.booleanValue()));
     }
 
 
@@ -363,6 +379,58 @@ public class ClassScheduleResourceIT {
 
         // Get all the classScheduleList where created is null
         defaultClassScheduleShouldNotBeFound("created.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByScheduleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where schedule equals to DEFAULT_SCHEDULE
+        defaultClassScheduleShouldBeFound("schedule.equals=" + DEFAULT_SCHEDULE);
+
+        // Get all the classScheduleList where schedule equals to UPDATED_SCHEDULE
+        defaultClassScheduleShouldNotBeFound("schedule.equals=" + UPDATED_SCHEDULE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByScheduleIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where schedule not equals to DEFAULT_SCHEDULE
+        defaultClassScheduleShouldNotBeFound("schedule.notEquals=" + DEFAULT_SCHEDULE);
+
+        // Get all the classScheduleList where schedule not equals to UPDATED_SCHEDULE
+        defaultClassScheduleShouldBeFound("schedule.notEquals=" + UPDATED_SCHEDULE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByScheduleIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where schedule in DEFAULT_SCHEDULE or UPDATED_SCHEDULE
+        defaultClassScheduleShouldBeFound("schedule.in=" + DEFAULT_SCHEDULE + "," + UPDATED_SCHEDULE);
+
+        // Get all the classScheduleList where schedule equals to UPDATED_SCHEDULE
+        defaultClassScheduleShouldNotBeFound("schedule.in=" + UPDATED_SCHEDULE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByScheduleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where schedule is not null
+        defaultClassScheduleShouldBeFound("schedule.specified=true");
+
+        // Get all the classScheduleList where schedule is null
+        defaultClassScheduleShouldNotBeFound("schedule.specified=false");
     }
 
     @Test
@@ -861,6 +929,58 @@ public class ClassScheduleResourceIT {
 
     @Test
     @Transactional
+    public void getAllClassSchedulesByReoccurringIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurring equals to DEFAULT_REOCCURRING
+        defaultClassScheduleShouldBeFound("reoccurring.equals=" + DEFAULT_REOCCURRING);
+
+        // Get all the classScheduleList where reoccurring equals to UPDATED_REOCCURRING
+        defaultClassScheduleShouldNotBeFound("reoccurring.equals=" + UPDATED_REOCCURRING);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurring not equals to DEFAULT_REOCCURRING
+        defaultClassScheduleShouldNotBeFound("reoccurring.notEquals=" + DEFAULT_REOCCURRING);
+
+        // Get all the classScheduleList where reoccurring not equals to UPDATED_REOCCURRING
+        defaultClassScheduleShouldBeFound("reoccurring.notEquals=" + UPDATED_REOCCURRING);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurring in DEFAULT_REOCCURRING or UPDATED_REOCCURRING
+        defaultClassScheduleShouldBeFound("reoccurring.in=" + DEFAULT_REOCCURRING + "," + UPDATED_REOCCURRING);
+
+        // Get all the classScheduleList where reoccurring equals to UPDATED_REOCCURRING
+        defaultClassScheduleShouldNotBeFound("reoccurring.in=" + UPDATED_REOCCURRING);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurring is not null
+        defaultClassScheduleShouldBeFound("reoccurring.specified=true");
+
+        // Get all the classScheduleList where reoccurring is null
+        defaultClassScheduleShouldNotBeFound("reoccurring.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllClassSchedulesByStudentIsEqualToSomething() throws Exception {
         // Initialize the database
         classScheduleRepository.saveAndFlush(classSchedule);
@@ -948,13 +1068,15 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(classSchedule.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
+            .andExpect(jsonPath("$.[*].schedule").value(hasItem(DEFAULT_SCHEDULE.toString())))
             .andExpect(jsonPath("$.[*].updated").value(hasItem(DEFAULT_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)))
             .andExpect(jsonPath("$.[*].confirmedByStudent").value(hasItem(DEFAULT_CONFIRMED_BY_STUDENT)))
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
-            .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())));
+            .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())));
 
         // Check, that the count call also returns 1
         restClassScheduleMockMvc.perform(get("/api/class-schedules/count?sort=id,desc&" + filter))
@@ -1003,13 +1125,15 @@ public class ClassScheduleResourceIT {
         updatedClassSchedule
             .name(UPDATED_NAME)
             .created(UPDATED_CREATED)
+            .schedule(UPDATED_SCHEDULE)
             .updated(UPDATED_UPDATED)
             .createdBy(UPDATED_CREATED_BY)
             .updatedBy(UPDATED_UPDATED_BY)
             .confirmedByStudent(UPDATED_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
-            .connected(UPDATED_CONNECTED);
+            .connected(UPDATED_CONNECTED)
+            .reoccurring(UPDATED_REOCCURRING);
 
         restClassScheduleMockMvc.perform(put("/api/class-schedules")
             .contentType(MediaType.APPLICATION_JSON)
@@ -1022,6 +1146,7 @@ public class ClassScheduleResourceIT {
         ClassSchedule testClassSchedule = classScheduleList.get(classScheduleList.size() - 1);
         assertThat(testClassSchedule.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClassSchedule.getCreated()).isEqualTo(UPDATED_CREATED);
+        assertThat(testClassSchedule.getSchedule()).isEqualTo(UPDATED_SCHEDULE);
         assertThat(testClassSchedule.getUpdated()).isEqualTo(UPDATED_UPDATED);
         assertThat(testClassSchedule.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testClassSchedule.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
@@ -1029,6 +1154,7 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(UPDATED_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testClassSchedule.isConnected()).isEqualTo(UPDATED_CONNECTED);
+        assertThat(testClassSchedule.isReoccurring()).isEqualTo(UPDATED_REOCCURRING);
     }
 
     @Test

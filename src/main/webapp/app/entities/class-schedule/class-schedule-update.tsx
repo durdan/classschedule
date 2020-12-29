@@ -56,6 +56,7 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
 
   const saveEntity = (event, errors, values) => {
     values.created = convertDateTimeToServer(values.created);
+    values.schedule = convertDateTimeToServer(values.schedule);
     values.updated = convertDateTimeToServer(values.updated);
 
     if (errors.length === 0) {
@@ -115,6 +116,19 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
+                <Label id="scheduleLabel" for="class-schedule-schedule">
+                  <Translate contentKey="classscheduleApp.classSchedule.schedule">Schedule</Translate>
+                </Label>
+                <AvInput
+                  id="class-schedule-schedule"
+                  type="datetime-local"
+                  className="form-control"
+                  name="schedule"
+                  placeholder={'YYYY-MM-DD HH:mm'}
+                  value={isNew ? displayDefaultDateTime() : convertDateTimeFromServer(props.classScheduleEntity.schedule)}
+                />
+              </AvGroup>
+              <AvGroup>
                 <Label id="updatedLabel" for="class-schedule-updated">
                   <Translate contentKey="classscheduleApp.classSchedule.updated">Updated</Translate>
                 </Label>
@@ -161,6 +175,12 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
                 <Label id="connectedLabel">
                   <AvInput id="class-schedule-connected" type="checkbox" className="form-check-input" name="connected" />
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate>
+                </Label>
+              </AvGroup>
+              <AvGroup check>
+                <Label id="reoccurringLabel">
+                  <AvInput id="class-schedule-reoccurring" type="checkbox" className="form-check-input" name="reoccurring" />
+                  <Translate contentKey="classscheduleApp.classSchedule.reoccurring">Reoccurring</Translate>
                 </Label>
               </AvGroup>
               <AvGroup>

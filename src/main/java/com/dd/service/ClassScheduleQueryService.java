@@ -91,6 +91,9 @@ public class ClassScheduleQueryService extends QueryService<ClassSchedule> {
             if (criteria.getCreated() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCreated(), ClassSchedule_.created));
             }
+            if (criteria.getSchedule() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSchedule(), ClassSchedule_.schedule));
+            }
             if (criteria.getUpdated() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getUpdated(), ClassSchedule_.updated));
             }
@@ -111,6 +114,9 @@ public class ClassScheduleQueryService extends QueryService<ClassSchedule> {
             }
             if (criteria.getConnected() != null) {
                 specification = specification.and(buildSpecification(criteria.getConnected(), ClassSchedule_.connected));
+            }
+            if (criteria.getReoccurring() != null) {
+                specification = specification.and(buildSpecification(criteria.getReoccurring(), ClassSchedule_.reoccurring));
             }
             if (criteria.getStudentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getStudentId(),

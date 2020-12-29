@@ -40,6 +40,14 @@ export const ClassScheduleDetail = (props: IClassScheduleDetailProps) => {
             {classScheduleEntity.created ? <TextFormat value={classScheduleEntity.created} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
           <dt>
+            <span id="schedule">
+              <Translate contentKey="classscheduleApp.classSchedule.schedule">Schedule</Translate>
+            </span>
+          </dt>
+          <dd>
+            {classScheduleEntity.schedule ? <TextFormat value={classScheduleEntity.schedule} type="date" format={APP_DATE_FORMAT} /> : null}
+          </dd>
+          <dt>
             <span id="updated">
               <Translate contentKey="classscheduleApp.classSchedule.updated">Updated</Translate>
             </span>
@@ -83,6 +91,12 @@ export const ClassScheduleDetail = (props: IClassScheduleDetailProps) => {
             </span>
           </dt>
           <dd>{classScheduleEntity.connected ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="reoccurring">
+              <Translate contentKey="classscheduleApp.classSchedule.reoccurring">Reoccurring</Translate>
+            </span>
+          </dt>
+          <dd>{classScheduleEntity.reoccurring ? 'true' : 'false'}</dd>
           <dt>
             <Translate contentKey="classscheduleApp.classSchedule.student">Student</Translate>
           </dt>
