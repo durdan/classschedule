@@ -65,11 +65,17 @@ public class ClassScheduleResourceIT {
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_PAYMENT = false;
+    private static final Boolean UPDATED_PAYMENT = true;
+
     private static final Boolean DEFAULT_CONNECTED = false;
     private static final Boolean UPDATED_CONNECTED = true;
 
     private static final Boolean DEFAULT_REOCCURRING = false;
     private static final Boolean UPDATED_REOCCURRING = true;
+
+    private static final String DEFAULT_REOCCURRING_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_REOCCURRING_TYPE = "BBBBBBBBBB";
 
     @Autowired
     private ClassScheduleRepository classScheduleRepository;
@@ -105,8 +111,10 @@ public class ClassScheduleResourceIT {
             .confirmedByStudent(DEFAULT_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(DEFAULT_CONFIRMED_BY_TEACHER)
             .comment(DEFAULT_COMMENT)
+            .payment(DEFAULT_PAYMENT)
             .connected(DEFAULT_CONNECTED)
-            .reoccurring(DEFAULT_REOCCURRING);
+            .reoccurring(DEFAULT_REOCCURRING)
+            .reoccurringType(DEFAULT_REOCCURRING_TYPE);
         return classSchedule;
     }
     /**
@@ -126,8 +134,10 @@ public class ClassScheduleResourceIT {
             .confirmedByStudent(UPDATED_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
+            .payment(UPDATED_PAYMENT)
             .connected(UPDATED_CONNECTED)
-            .reoccurring(UPDATED_REOCCURRING);
+            .reoccurring(UPDATED_REOCCURRING)
+            .reoccurringType(UPDATED_REOCCURRING_TYPE);
         return classSchedule;
     }
 
@@ -159,8 +169,10 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByStudent()).isEqualTo(DEFAULT_CONFIRMED_BY_STUDENT);
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(DEFAULT_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(DEFAULT_COMMENT);
+        assertThat(testClassSchedule.isPayment()).isEqualTo(DEFAULT_PAYMENT);
         assertThat(testClassSchedule.isConnected()).isEqualTo(DEFAULT_CONNECTED);
         assertThat(testClassSchedule.isReoccurring()).isEqualTo(DEFAULT_REOCCURRING);
+        assertThat(testClassSchedule.getReoccurringType()).isEqualTo(DEFAULT_REOCCURRING_TYPE);
     }
 
     @Test
@@ -203,8 +215,10 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].confirmedByStudent").value(hasItem(DEFAULT_CONFIRMED_BY_STUDENT)))
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
+            .andExpect(jsonPath("$.[*].payment").value(hasItem(DEFAULT_PAYMENT.booleanValue())))
             .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
-            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())));
+            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())))
+            .andExpect(jsonPath("$.[*].reoccurringType").value(hasItem(DEFAULT_REOCCURRING_TYPE)));
     }
     
     @Test
@@ -227,8 +241,10 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.confirmedByStudent").value(DEFAULT_CONFIRMED_BY_STUDENT))
             .andExpect(jsonPath("$.confirmedByTeacher").value(DEFAULT_CONFIRMED_BY_TEACHER))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT))
+            .andExpect(jsonPath("$.payment").value(DEFAULT_PAYMENT.booleanValue()))
             .andExpect(jsonPath("$.connected").value(DEFAULT_CONNECTED.booleanValue()))
-            .andExpect(jsonPath("$.reoccurring").value(DEFAULT_REOCCURRING.booleanValue()));
+            .andExpect(jsonPath("$.reoccurring").value(DEFAULT_REOCCURRING.booleanValue()))
+            .andExpect(jsonPath("$.reoccurringType").value(DEFAULT_REOCCURRING_TYPE));
     }
 
 
@@ -877,6 +893,58 @@ public class ClassScheduleResourceIT {
 
     @Test
     @Transactional
+    public void getAllClassSchedulesByPaymentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where payment equals to DEFAULT_PAYMENT
+        defaultClassScheduleShouldBeFound("payment.equals=" + DEFAULT_PAYMENT);
+
+        // Get all the classScheduleList where payment equals to UPDATED_PAYMENT
+        defaultClassScheduleShouldNotBeFound("payment.equals=" + UPDATED_PAYMENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByPaymentIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where payment not equals to DEFAULT_PAYMENT
+        defaultClassScheduleShouldNotBeFound("payment.notEquals=" + DEFAULT_PAYMENT);
+
+        // Get all the classScheduleList where payment not equals to UPDATED_PAYMENT
+        defaultClassScheduleShouldBeFound("payment.notEquals=" + UPDATED_PAYMENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByPaymentIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where payment in DEFAULT_PAYMENT or UPDATED_PAYMENT
+        defaultClassScheduleShouldBeFound("payment.in=" + DEFAULT_PAYMENT + "," + UPDATED_PAYMENT);
+
+        // Get all the classScheduleList where payment equals to UPDATED_PAYMENT
+        defaultClassScheduleShouldNotBeFound("payment.in=" + UPDATED_PAYMENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByPaymentIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where payment is not null
+        defaultClassScheduleShouldBeFound("payment.specified=true");
+
+        // Get all the classScheduleList where payment is null
+        defaultClassScheduleShouldNotBeFound("payment.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllClassSchedulesByConnectedIsEqualToSomething() throws Exception {
         // Initialize the database
         classScheduleRepository.saveAndFlush(classSchedule);
@@ -981,6 +1049,84 @@ public class ClassScheduleResourceIT {
 
     @Test
     @Transactional
+    public void getAllClassSchedulesByReoccurringTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType equals to DEFAULT_REOCCURRING_TYPE
+        defaultClassScheduleShouldBeFound("reoccurringType.equals=" + DEFAULT_REOCCURRING_TYPE);
+
+        // Get all the classScheduleList where reoccurringType equals to UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldNotBeFound("reoccurringType.equals=" + UPDATED_REOCCURRING_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType not equals to DEFAULT_REOCCURRING_TYPE
+        defaultClassScheduleShouldNotBeFound("reoccurringType.notEquals=" + DEFAULT_REOCCURRING_TYPE);
+
+        // Get all the classScheduleList where reoccurringType not equals to UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldBeFound("reoccurringType.notEquals=" + UPDATED_REOCCURRING_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType in DEFAULT_REOCCURRING_TYPE or UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldBeFound("reoccurringType.in=" + DEFAULT_REOCCURRING_TYPE + "," + UPDATED_REOCCURRING_TYPE);
+
+        // Get all the classScheduleList where reoccurringType equals to UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldNotBeFound("reoccurringType.in=" + UPDATED_REOCCURRING_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType is not null
+        defaultClassScheduleShouldBeFound("reoccurringType.specified=true");
+
+        // Get all the classScheduleList where reoccurringType is null
+        defaultClassScheduleShouldNotBeFound("reoccurringType.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringTypeContainsSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType contains DEFAULT_REOCCURRING_TYPE
+        defaultClassScheduleShouldBeFound("reoccurringType.contains=" + DEFAULT_REOCCURRING_TYPE);
+
+        // Get all the classScheduleList where reoccurringType contains UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldNotBeFound("reoccurringType.contains=" + UPDATED_REOCCURRING_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByReoccurringTypeNotContainsSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where reoccurringType does not contain DEFAULT_REOCCURRING_TYPE
+        defaultClassScheduleShouldNotBeFound("reoccurringType.doesNotContain=" + DEFAULT_REOCCURRING_TYPE);
+
+        // Get all the classScheduleList where reoccurringType does not contain UPDATED_REOCCURRING_TYPE
+        defaultClassScheduleShouldBeFound("reoccurringType.doesNotContain=" + UPDATED_REOCCURRING_TYPE);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllClassSchedulesByStudentIsEqualToSomething() throws Exception {
         // Initialize the database
         classScheduleRepository.saveAndFlush(classSchedule);
@@ -1075,8 +1221,10 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].confirmedByStudent").value(hasItem(DEFAULT_CONFIRMED_BY_STUDENT)))
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
+            .andExpect(jsonPath("$.[*].payment").value(hasItem(DEFAULT_PAYMENT.booleanValue())))
             .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
-            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())));
+            .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())))
+            .andExpect(jsonPath("$.[*].reoccurringType").value(hasItem(DEFAULT_REOCCURRING_TYPE)));
 
         // Check, that the count call also returns 1
         restClassScheduleMockMvc.perform(get("/api/class-schedules/count?sort=id,desc&" + filter))
@@ -1132,8 +1280,10 @@ public class ClassScheduleResourceIT {
             .confirmedByStudent(UPDATED_CONFIRMED_BY_STUDENT)
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
+            .payment(UPDATED_PAYMENT)
             .connected(UPDATED_CONNECTED)
-            .reoccurring(UPDATED_REOCCURRING);
+            .reoccurring(UPDATED_REOCCURRING)
+            .reoccurringType(UPDATED_REOCCURRING_TYPE);
 
         restClassScheduleMockMvc.perform(put("/api/class-schedules")
             .contentType(MediaType.APPLICATION_JSON)
@@ -1153,8 +1303,10 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByStudent()).isEqualTo(UPDATED_CONFIRMED_BY_STUDENT);
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(UPDATED_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(UPDATED_COMMENT);
+        assertThat(testClassSchedule.isPayment()).isEqualTo(UPDATED_PAYMENT);
         assertThat(testClassSchedule.isConnected()).isEqualTo(UPDATED_CONNECTED);
         assertThat(testClassSchedule.isReoccurring()).isEqualTo(UPDATED_REOCCURRING);
+        assertThat(testClassSchedule.getReoccurringType()).isEqualTo(UPDATED_REOCCURRING_TYPE);
     }
 
     @Test

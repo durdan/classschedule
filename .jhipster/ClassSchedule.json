@@ -38,12 +38,20 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "payment",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "connected",
       "fieldType": "Boolean"
     },
     {
       "fieldName": "reoccurring",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "reoccurringType",
+      "fieldType": "String"
     }
   ],
   "relationships": [

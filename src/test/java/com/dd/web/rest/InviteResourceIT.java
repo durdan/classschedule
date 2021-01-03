@@ -38,6 +38,9 @@ public class InviteResourceIT {
     private static final String DEFAULT_REQUESTED_USER_ID = "AAAAAAAAAA";
     private static final String UPDATED_REQUESTED_USER_ID = "BBBBBBBBBB";
 
+    private static final String DEFAULT_INVITE_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_INVITE_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_INVITED_USER_ID = "AAAAAAAAAA";
     private static final String UPDATED_INVITED_USER_ID = "BBBBBBBBBB";
 
@@ -76,6 +79,7 @@ public class InviteResourceIT {
     public static Invite createEntity(EntityManager em) {
         Invite invite = new Invite()
             .requestedUserId(DEFAULT_REQUESTED_USER_ID)
+            .inviteCode(DEFAULT_INVITE_CODE)
             .invitedUserId(DEFAULT_INVITED_USER_ID)
             .createdBy(DEFAULT_CREATED_BY)
             .created(DEFAULT_CREATED)
@@ -91,6 +95,7 @@ public class InviteResourceIT {
     public static Invite createUpdatedEntity(EntityManager em) {
         Invite invite = new Invite()
             .requestedUserId(UPDATED_REQUESTED_USER_ID)
+            .inviteCode(UPDATED_INVITE_CODE)
             .invitedUserId(UPDATED_INVITED_USER_ID)
             .createdBy(UPDATED_CREATED_BY)
             .created(UPDATED_CREATED)
@@ -118,6 +123,7 @@ public class InviteResourceIT {
         assertThat(inviteList).hasSize(databaseSizeBeforeCreate + 1);
         Invite testInvite = inviteList.get(inviteList.size() - 1);
         assertThat(testInvite.getRequestedUserId()).isEqualTo(DEFAULT_REQUESTED_USER_ID);
+        assertThat(testInvite.getInviteCode()).isEqualTo(DEFAULT_INVITE_CODE);
         assertThat(testInvite.getInvitedUserId()).isEqualTo(DEFAULT_INVITED_USER_ID);
         assertThat(testInvite.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testInvite.getCreated()).isEqualTo(DEFAULT_CREATED);
@@ -156,6 +162,7 @@ public class InviteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invite.getId().intValue())))
             .andExpect(jsonPath("$.[*].requestedUserId").value(hasItem(DEFAULT_REQUESTED_USER_ID)))
+            .andExpect(jsonPath("$.[*].inviteCode").value(hasItem(DEFAULT_INVITE_CODE)))
             .andExpect(jsonPath("$.[*].invitedUserId").value(hasItem(DEFAULT_INVITED_USER_ID)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -174,6 +181,7 @@ public class InviteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(invite.getId().intValue()))
             .andExpect(jsonPath("$.requestedUserId").value(DEFAULT_REQUESTED_USER_ID))
+            .andExpect(jsonPath("$.inviteCode").value(DEFAULT_INVITE_CODE))
             .andExpect(jsonPath("$.invitedUserId").value(DEFAULT_INVITED_USER_ID))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
@@ -275,6 +283,84 @@ public class InviteResourceIT {
 
         // Get all the inviteList where requestedUserId does not contain UPDATED_REQUESTED_USER_ID
         defaultInviteShouldBeFound("requestedUserId.doesNotContain=" + UPDATED_REQUESTED_USER_ID);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode equals to DEFAULT_INVITE_CODE
+        defaultInviteShouldBeFound("inviteCode.equals=" + DEFAULT_INVITE_CODE);
+
+        // Get all the inviteList where inviteCode equals to UPDATED_INVITE_CODE
+        defaultInviteShouldNotBeFound("inviteCode.equals=" + UPDATED_INVITE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode not equals to DEFAULT_INVITE_CODE
+        defaultInviteShouldNotBeFound("inviteCode.notEquals=" + DEFAULT_INVITE_CODE);
+
+        // Get all the inviteList where inviteCode not equals to UPDATED_INVITE_CODE
+        defaultInviteShouldBeFound("inviteCode.notEquals=" + UPDATED_INVITE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode in DEFAULT_INVITE_CODE or UPDATED_INVITE_CODE
+        defaultInviteShouldBeFound("inviteCode.in=" + DEFAULT_INVITE_CODE + "," + UPDATED_INVITE_CODE);
+
+        // Get all the inviteList where inviteCode equals to UPDATED_INVITE_CODE
+        defaultInviteShouldNotBeFound("inviteCode.in=" + UPDATED_INVITE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode is not null
+        defaultInviteShouldBeFound("inviteCode.specified=true");
+
+        // Get all the inviteList where inviteCode is null
+        defaultInviteShouldNotBeFound("inviteCode.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeContainsSomething() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode contains DEFAULT_INVITE_CODE
+        defaultInviteShouldBeFound("inviteCode.contains=" + DEFAULT_INVITE_CODE);
+
+        // Get all the inviteList where inviteCode contains UPDATED_INVITE_CODE
+        defaultInviteShouldNotBeFound("inviteCode.contains=" + UPDATED_INVITE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllInvitesByInviteCodeNotContainsSomething() throws Exception {
+        // Initialize the database
+        inviteRepository.saveAndFlush(invite);
+
+        // Get all the inviteList where inviteCode does not contain DEFAULT_INVITE_CODE
+        defaultInviteShouldNotBeFound("inviteCode.doesNotContain=" + DEFAULT_INVITE_CODE);
+
+        // Get all the inviteList where inviteCode does not contain UPDATED_INVITE_CODE
+        defaultInviteShouldBeFound("inviteCode.doesNotContain=" + UPDATED_INVITE_CODE);
     }
 
 
@@ -566,6 +652,7 @@ public class InviteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invite.getId().intValue())))
             .andExpect(jsonPath("$.[*].requestedUserId").value(hasItem(DEFAULT_REQUESTED_USER_ID)))
+            .andExpect(jsonPath("$.[*].inviteCode").value(hasItem(DEFAULT_INVITE_CODE)))
             .andExpect(jsonPath("$.[*].invitedUserId").value(hasItem(DEFAULT_INVITED_USER_ID)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -617,6 +704,7 @@ public class InviteResourceIT {
         em.detach(updatedInvite);
         updatedInvite
             .requestedUserId(UPDATED_REQUESTED_USER_ID)
+            .inviteCode(UPDATED_INVITE_CODE)
             .invitedUserId(UPDATED_INVITED_USER_ID)
             .createdBy(UPDATED_CREATED_BY)
             .created(UPDATED_CREATED)
@@ -632,6 +720,7 @@ public class InviteResourceIT {
         assertThat(inviteList).hasSize(databaseSizeBeforeUpdate);
         Invite testInvite = inviteList.get(inviteList.size() - 1);
         assertThat(testInvite.getRequestedUserId()).isEqualTo(UPDATED_REQUESTED_USER_ID);
+        assertThat(testInvite.getInviteCode()).isEqualTo(UPDATED_INVITE_CODE);
         assertThat(testInvite.getInvitedUserId()).isEqualTo(UPDATED_INVITED_USER_ID);
         assertThat(testInvite.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testInvite.getCreated()).isEqualTo(UPDATED_CREATED);

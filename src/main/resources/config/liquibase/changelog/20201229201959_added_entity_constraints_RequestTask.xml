@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity RequestTask.
+    -->
+    <changeSet id="20201229201959-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="request_status_id"
+                                 baseTableName="request_task"
+                                 constraintName="fk_request_task_request_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="request_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="request_task"
+                                 constraintName="fk_request_task_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

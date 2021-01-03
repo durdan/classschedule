@@ -4,6 +4,7 @@ import { IInviteStatus } from 'app/shared/model/invite-status.model';
 export interface IInvite {
   id?: number;
   requestedUserId?: string;
+  inviteCode?: string;
   invitedUserId?: string;
   createdBy?: string;
   created?: string;

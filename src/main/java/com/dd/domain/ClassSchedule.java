@@ -51,11 +51,17 @@ public class ClassSchedule implements Serializable {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "payment")
+    private Boolean payment;
+
     @Column(name = "connected")
     private Boolean connected;
 
     @Column(name = "reoccurring")
     private Boolean reoccurring;
+
+    @Column(name = "reoccurring_type")
+    private String reoccurringType;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "classSchedules", allowSetters = true)
@@ -199,6 +205,19 @@ public class ClassSchedule implements Serializable {
         this.comment = comment;
     }
 
+    public Boolean isPayment() {
+        return payment;
+    }
+
+    public ClassSchedule payment(Boolean payment) {
+        this.payment = payment;
+        return this;
+    }
+
+    public void setPayment(Boolean payment) {
+        this.payment = payment;
+    }
+
     public Boolean isConnected() {
         return connected;
     }
@@ -223,6 +242,19 @@ public class ClassSchedule implements Serializable {
 
     public void setReoccurring(Boolean reoccurring) {
         this.reoccurring = reoccurring;
+    }
+
+    public String getReoccurringType() {
+        return reoccurringType;
+    }
+
+    public ClassSchedule reoccurringType(String reoccurringType) {
+        this.reoccurringType = reoccurringType;
+        return this;
+    }
+
+    public void setReoccurringType(String reoccurringType) {
+        this.reoccurringType = reoccurringType;
     }
 
     public Student getStudent() {
@@ -308,8 +340,10 @@ public class ClassSchedule implements Serializable {
             ", confirmedByStudent='" + getConfirmedByStudent() + "'" +
             ", confirmedByTeacher='" + getConfirmedByTeacher() + "'" +
             ", comment='" + getComment() + "'" +
+            ", payment='" + isPayment() + "'" +
             ", connected='" + isConnected() + "'" +
             ", reoccurring='" + isReoccurring() + "'" +
+            ", reoccurringType='" + getReoccurringType() + "'" +
             "}";
     }
 }

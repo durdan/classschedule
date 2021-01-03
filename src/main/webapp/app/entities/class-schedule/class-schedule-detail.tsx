@@ -86,6 +86,12 @@ export const ClassScheduleDetail = (props: IClassScheduleDetailProps) => {
           </dt>
           <dd>{classScheduleEntity.comment}</dd>
           <dt>
+            <span id="payment">
+              <Translate contentKey="classscheduleApp.classSchedule.payment">Payment</Translate>
+            </span>
+          </dt>
+          <dd>{classScheduleEntity.payment ? 'true' : 'false'}</dd>
+          <dt>
             <span id="connected">
               <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate>
             </span>
@@ -97,6 +103,12 @@ export const ClassScheduleDetail = (props: IClassScheduleDetailProps) => {
             </span>
           </dt>
           <dd>{classScheduleEntity.reoccurring ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="reoccurringType">
+              <Translate contentKey="classscheduleApp.classSchedule.reoccurringType">Reoccurring Type</Translate>
+            </span>
+          </dt>
+          <dd>{classScheduleEntity.reoccurringType}</dd>
           <dt>
             <Translate contentKey="classscheduleApp.classSchedule.student">Student</Translate>
           </dt>

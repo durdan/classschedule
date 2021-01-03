@@ -32,6 +32,12 @@ export const InviteDetail = (props: IInviteDetailProps) => {
           </dt>
           <dd>{inviteEntity.requestedUserId}</dd>
           <dt>
+            <span id="inviteCode">
+              <Translate contentKey="classscheduleApp.invite.inviteCode">Invite Code</Translate>
+            </span>
+          </dt>
+          <dd>{inviteEntity.inviteCode}</dd>
+          <dt>
             <span id="invitedUserId">
               <Translate contentKey="classscheduleApp.invite.invitedUserId">Invited User Id</Translate>
             </span>

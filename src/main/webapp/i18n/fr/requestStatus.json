@@ -1,0 +1,23 @@
+{
+  "classscheduleApp": {
+    "requestStatus": {
+      "home": {
+        "title": "RequestStatuses",
+        "createLabel": "Créer un nouveau Request Status",
+        "createOrEditLabel": "Créer ou éditer un Request Status",
+        "notFound": "Aucun Request Status trouvé"
+      },
+      "created": "Un nouveau Request Status a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Request Status avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Request Status avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Request Status {{ id }} ?"
+      },
+      "detail": {
+        "title": "Request Status"
+      },
+      "statusCode": "Status Code",
+      "status": "Status"
+    }
+  }
+}

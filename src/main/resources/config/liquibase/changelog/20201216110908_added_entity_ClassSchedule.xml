@@ -42,10 +42,16 @@
             <column name="comment" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="payment" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="connected" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="reoccurring" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="reoccurring_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="student_id" type="bigint">
@@ -95,8 +101,10 @@
             <column name="confirmed_by_student" type="string"/>
             <column name="confirmed_by_teacher" type="string"/>
             <column name="comment" type="string"/>
+            <column name="payment" type="boolean"/>
             <column name="connected" type="boolean"/>
             <column name="reoccurring" type="boolean"/>
+            <column name="reoccurring_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

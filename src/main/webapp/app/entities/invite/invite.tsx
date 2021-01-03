@@ -87,6 +87,9 @@ export const Invite = (props: IInviteProps) => {
                   <Translate contentKey="classscheduleApp.invite.requestedUserId">Requested User Id</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('inviteCode')}>
+                  <Translate contentKey="classscheduleApp.invite.inviteCode">Invite Code</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('invitedUserId')}>
                   <Translate contentKey="classscheduleApp.invite.invitedUserId">Invited User Id</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -114,6 +117,7 @@ export const Invite = (props: IInviteProps) => {
                     </Button>
                   </td>
                   <td>{invite.requestedUserId}</td>
+                  <td>{invite.inviteCode}</td>
                   <td>{invite.invitedUserId}</td>
                   <td>{invite.createdBy}</td>
                   <td>{invite.created ? <TextFormat type="date" value={invite.created} format={APP_DATE_FORMAT} /> : null}</td>

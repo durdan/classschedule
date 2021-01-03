@@ -16,6 +16,8 @@
         "classSchedule": "Class Schedule",
         "notification": "Notification",
         "userExtra": "User Extra",
+        "requestTask": "Request Task",
+        "requestStatus": "Request Status",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

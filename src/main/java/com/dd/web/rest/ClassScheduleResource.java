@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.*;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +65,36 @@ public class ClassScheduleResource {
         if (classSchedule.getId() != null) {
             throw new BadRequestAlertException("A new classSchedule cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ClassSchedule result = classScheduleService.save(classSchedule);
+        ClassSchedule result=null;
+        if (classSchedule.getReoccurringType()!=null){
+            ZonedDateTime d = ZonedDateTime.parse(classSchedule.getSchedule().toString());
+           List<LocalDateTime> localDates= getWeeklyMeetingDates(d.toLocalDateTime(),5,classSchedule.getReoccurringType());
+            for (LocalDateTime localDateTime : localDates){
+                ClassSchedule classSchedule1 = new ClassSchedule();
+                classSchedule1 = classSchedule;
+//                classSchedule1.setComment(classSchedule.getComment());
+//                classSchedule1.setConfirmedByStudent(classSchedule.getConfirmedByStudent());
+//                classSchedule1.setConfirmedByTeacher(classSchedule.getConfirmedByTeacher());
+//                classSchedule1.setConnected(classSchedule.isConnected());
+//                classSchedule1.setCourse(classSchedule.getCourse());
+//                classSchedule1.setParent(classSchedule.getParent());
+//                classSchedule1.setStudent(classSchedule.getStudent());
+//                classSchedule1.setTeacher(classSchedule.getTeacher());
+//                classSchedule1.setCreated(classSchedule.getCreated());
+//                classSchedule1.setCreatedBy(classSchedule.getCreatedBy());
+//                classSchedule1.setPayment(classSchedule.isPayment());
+//                classSchedule1.setReoccurring(classSchedule.isReoccurring());
+//                clas
+                classSchedule1.setSchedule(localDateTime.toInstant(ZoneOffset.UTC));
+                classSchedule1.setId(null);
+                result = classScheduleService.save(classSchedule1);
+            }
+        }else{
+              result = classScheduleService.save(classSchedule);
+        }
+
+
+
         return ResponseEntity.created(new URI("/api/class-schedules/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -139,5 +172,39 @@ public class ClassScheduleResource {
         log.debug("REST request to delete ClassSchedule : {}", id);
         classScheduleService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    private  List<LocalDateTime>
+    getWeeklyMeetingDates(LocalDateTime localDate, int count, String reoccuringtype)
+    {
+        //Custom temporal adjuster with lambda
+        TemporalAdjuster temporalAdjuster = t -> t.plus(Period.ofDays(7));
+        List<LocalDateTime> dates = new ArrayList<>();
+        for(int i = 0; i < count; i++)
+        {
+            if(reoccuringtype.equals("1")){
+                localDate = localDate
+                    .with(TemporalAdjusters.next(localDate.getDayOfWeek()));
+
+                dates.add(localDate);
+                log.info("Weekly {}",localDate);
+
+            }
+            if(reoccuringtype.equals("2")){
+                localDate = localDate
+                    .with(TemporalAdjusters.next(localDate.getDayOfWeek()));
+                localDate= localDate.plusWeeks( 1 );
+
+                dates.add(localDate);
+                log.info("BI-WEEKLY{}",localDate);
+
+            }
+
+
+
+
+            //log.info("MONTHLY {}",localDate.with(TemporalAdjusters.firstInMonth(0,localDate.getDayOfWeek())));
+        }
+        return dates;
     }
 }

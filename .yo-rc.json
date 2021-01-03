@@ -39,5 +39,17 @@
     "otherModules": [],
     "blueprints": []
   },
-  "entities": ["Student", "Parent", "UserExtra", "Teacher", "Course", "Invite", "InviteStatus", "ClassSchedule", "Notification"]
+  "entities": [
+    "Student",
+    "Parent",
+    "UserExtra",
+    "Teacher",
+    "Course",
+    "Invite",
+    "InviteStatus",
+    "RequestTask",
+    "RequestStatus",
+    "ClassSchedule",
+    "Notification"
+  ]
 }

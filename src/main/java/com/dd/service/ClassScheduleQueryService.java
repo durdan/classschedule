@@ -112,11 +112,17 @@ public class ClassScheduleQueryService extends QueryService<ClassSchedule> {
             if (criteria.getComment() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getComment(), ClassSchedule_.comment));
             }
+            if (criteria.getPayment() != null) {
+                specification = specification.and(buildSpecification(criteria.getPayment(), ClassSchedule_.payment));
+            }
             if (criteria.getConnected() != null) {
                 specification = specification.and(buildSpecification(criteria.getConnected(), ClassSchedule_.connected));
             }
             if (criteria.getReoccurring() != null) {
                 specification = specification.and(buildSpecification(criteria.getReoccurring(), ClassSchedule_.reoccurring));
+            }
+            if (criteria.getReoccurringType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getReoccurringType(), ClassSchedule_.reoccurringType));
             }
             if (criteria.getStudentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getStudentId(),

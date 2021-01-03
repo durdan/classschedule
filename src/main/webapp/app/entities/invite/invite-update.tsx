@@ -90,6 +90,12 @@ export const InviteUpdate = (props: IInviteUpdateProps) => {
                 <AvField id="invite-requestedUserId" type="text" name="requestedUserId" />
               </AvGroup>
               <AvGroup>
+                <Label id="inviteCodeLabel" for="invite-inviteCode">
+                  <Translate contentKey="classscheduleApp.invite.inviteCode">Invite Code</Translate>
+                </Label>
+                <AvField id="invite-inviteCode" type="text" name="inviteCode" />
+              </AvGroup>
+              <AvGroup>
                 <Label id="invitedUserIdLabel" for="invite-invitedUserId">
                   <Translate contentKey="classscheduleApp.invite.invitedUserId">Invited User Id</Translate>
                 </Label>

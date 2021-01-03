@@ -6,6 +6,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "inviteCode",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "invitedUserId",
       "fieldType": "String"
     },

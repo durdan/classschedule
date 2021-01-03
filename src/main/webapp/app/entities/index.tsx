@@ -13,6 +13,8 @@ import InviteStatus from './invite-status';
 import ClassSchedule from './class-schedule';
 import Notification from './notification';
 import UserExtra from './user-extra';
+import RequestTask from './request-task';
+import RequestStatus from './request-status';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -28,6 +30,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}class-schedule`} component={ClassSchedule} />
       <ErrorBoundaryRoute path={`${match.url}notification`} component={Notification} />
       <ErrorBoundaryRoute path={`${match.url}user-extra`} component={UserExtra} />
+      <ErrorBoundaryRoute path={`${match.url}request-task`} component={RequestTask} />
+      <ErrorBoundaryRoute path={`${match.url}request-status`} component={RequestStatus} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -27,6 +27,9 @@ public class Invite implements Serializable {
     @Column(name = "requested_user_id")
     private String requestedUserId;
 
+    @Column(name = "invite_code")
+    private String inviteCode;
+
     @Column(name = "invited_user_id")
     private String invitedUserId;
 
@@ -63,6 +66,19 @@ public class Invite implements Serializable {
 
     public void setRequestedUserId(String requestedUserId) {
         this.requestedUserId = requestedUserId;
+    }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public Invite inviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+        return this;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
     public String getInvitedUserId() {
@@ -153,6 +169,7 @@ public class Invite implements Serializable {
         return "Invite{" +
             "id=" + getId() +
             ", requestedUserId='" + getRequestedUserId() + "'" +
+            ", inviteCode='" + getInviteCode() + "'" +
             ", invitedUserId='" + getInvitedUserId() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", created='" + getCreated() + "'" +

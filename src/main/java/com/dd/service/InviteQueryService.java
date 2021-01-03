@@ -88,6 +88,9 @@ public class InviteQueryService extends QueryService<Invite> {
             if (criteria.getRequestedUserId() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRequestedUserId(), Invite_.requestedUserId));
             }
+            if (criteria.getInviteCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getInviteCode(), Invite_.inviteCode));
+            }
             if (criteria.getInvitedUserId() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getInvitedUserId(), Invite_.invitedUserId));
             }

@@ -48,6 +48,14 @@ import notification, {
 import userExtra, {
   UserExtraState
 } from 'app/entities/user-extra/user-extra.reducer';
+// prettier-ignore
+import requestTask, {
+  RequestTaskState
+} from 'app/entities/request-task/request-task.reducer';
+// prettier-ignore
+import requestStatus, {
+  RequestStatusState
+} from 'app/entities/request-status/request-status.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -70,6 +78,8 @@ export interface IRootState {
   readonly classSchedule: ClassScheduleState;
   readonly notification: NotificationState;
   readonly userExtra: UserExtraState;
+  readonly requestTask: RequestTaskState;
+  readonly requestStatus: RequestStatusState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -94,6 +104,8 @@ const rootReducer = combineReducers<IRootState>({
   classSchedule,
   notification,
   userExtra,
+  requestTask,
+  requestStatus,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

@@ -58,6 +58,7 @@ entity Course {
 
 entity Invite {
   requestedUserId String,
+  inviteCode String,
   invitedUserId String,
   createdBy String,
   created Instant,
@@ -76,6 +77,27 @@ entity InviteStatus{
 	status String
 }
 
+entity RequestTask {
+  requestedUserId String,
+  requestCode String,
+  requestType String,
+  requiredActionFromUserId String,
+  createdBy String,
+  created Instant,
+  updated Instant
+}
+
+//Code	Meaning
+//0	Pending
+//1	Accepted
+//2	Declined
+//3	Blocked
+
+entity RequestStatus{
+	statusCode Integer,
+	status String
+}
+
 entity ClassSchedule{
 name String,
 created Instant,
@@ -86,8 +108,10 @@ updatedBy String,
 confirmedByStudent String,
 confirmedByTeacher String,
 comment String,
+payment Boolean,
 connected Boolean,
-reoccurring Boolean
+reoccurring Boolean,
+reoccurringType String
 }
 
 
@@ -117,6 +141,8 @@ ClassSchedule {teacher} to Teacher
 ClassSchedule {parent} to  Parent
 ClassSchedule {course(name)} to Course
 Invite {invitestatus(status)} to InviteStatus
+RequestTask {requestStatus(status)} to RequestStatus
+RequestTask {user(email)} to  User
 Student {parent(firstName)} to Parent
 Student {Teacher(firstName)} to Teacher
 Teacher {parent(firstName)} to Parent

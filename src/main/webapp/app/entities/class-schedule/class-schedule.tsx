@@ -112,11 +112,18 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                 <th className="hand" onClick={sort('comment')}>
                   <Translate contentKey="classscheduleApp.classSchedule.comment">Comment</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('payment')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.payment">Payment</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('connected')}>
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('reoccurring')}>
                   <Translate contentKey="classscheduleApp.classSchedule.reoccurring">Reoccurring</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('reoccurringType')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.reoccurringType">Reoccurring Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="classscheduleApp.classSchedule.student">Student</Translate> <FontAwesomeIcon icon="sort" />
@@ -156,8 +163,10 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                   <td>{classSchedule.confirmedByStudent}</td>
                   <td>{classSchedule.confirmedByTeacher}</td>
                   <td>{classSchedule.comment}</td>
+                  <td>{classSchedule.payment ? 'true' : 'false'}</td>
                   <td>{classSchedule.connected ? 'true' : 'false'}</td>
                   <td>{classSchedule.reoccurring ? 'true' : 'false'}</td>
+                  <td>{classSchedule.reoccurringType}</td>
                   <td>{classSchedule.student ? <Link to={`student/${classSchedule.student.id}`}>{classSchedule.student.id}</Link> : ''}</td>
                   <td>{classSchedule.teacher ? <Link to={`teacher/${classSchedule.teacher.id}`}>{classSchedule.teacher.id}</Link> : ''}</td>
                   <td>{classSchedule.parent ? <Link to={`parent/${classSchedule.parent.id}`}>{classSchedule.parent.id}</Link> : ''}</td>

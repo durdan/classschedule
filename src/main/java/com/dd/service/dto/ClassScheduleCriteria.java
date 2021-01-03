@@ -45,9 +45,13 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
 
     private StringFilter comment;
 
+    private BooleanFilter payment;
+
     private BooleanFilter connected;
 
     private BooleanFilter reoccurring;
+
+    private StringFilter reoccurringType;
 
     private LongFilter studentId;
 
@@ -71,8 +75,10 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.confirmedByStudent = other.confirmedByStudent == null ? null : other.confirmedByStudent.copy();
         this.confirmedByTeacher = other.confirmedByTeacher == null ? null : other.confirmedByTeacher.copy();
         this.comment = other.comment == null ? null : other.comment.copy();
+        this.payment = other.payment == null ? null : other.payment.copy();
         this.connected = other.connected == null ? null : other.connected.copy();
         this.reoccurring = other.reoccurring == null ? null : other.reoccurring.copy();
+        this.reoccurringType = other.reoccurringType == null ? null : other.reoccurringType.copy();
         this.studentId = other.studentId == null ? null : other.studentId.copy();
         this.teacherId = other.teacherId == null ? null : other.teacherId.copy();
         this.parentId = other.parentId == null ? null : other.parentId.copy();
@@ -164,6 +170,14 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.comment = comment;
     }
 
+    public BooleanFilter getPayment() {
+        return payment;
+    }
+
+    public void setPayment(BooleanFilter payment) {
+        this.payment = payment;
+    }
+
     public BooleanFilter getConnected() {
         return connected;
     }
@@ -178,6 +192,14 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
 
     public void setReoccurring(BooleanFilter reoccurring) {
         this.reoccurring = reoccurring;
+    }
+
+    public StringFilter getReoccurringType() {
+        return reoccurringType;
+    }
+
+    public void setReoccurringType(StringFilter reoccurringType) {
+        this.reoccurringType = reoccurringType;
     }
 
     public LongFilter getStudentId() {
@@ -233,8 +255,10 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
             Objects.equals(confirmedByStudent, that.confirmedByStudent) &&
             Objects.equals(confirmedByTeacher, that.confirmedByTeacher) &&
             Objects.equals(comment, that.comment) &&
+            Objects.equals(payment, that.payment) &&
             Objects.equals(connected, that.connected) &&
             Objects.equals(reoccurring, that.reoccurring) &&
+            Objects.equals(reoccurringType, that.reoccurringType) &&
             Objects.equals(studentId, that.studentId) &&
             Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(parentId, that.parentId) &&
@@ -254,8 +278,10 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         confirmedByStudent,
         confirmedByTeacher,
         comment,
+        payment,
         connected,
         reoccurring,
+        reoccurringType,
         studentId,
         teacherId,
         parentId,
@@ -277,8 +303,10 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
                 (confirmedByStudent != null ? "confirmedByStudent=" + confirmedByStudent + ", " : "") +
                 (confirmedByTeacher != null ? "confirmedByTeacher=" + confirmedByTeacher + ", " : "") +
                 (comment != null ? "comment=" + comment + ", " : "") +
+                (payment != null ? "payment=" + payment + ", " : "") +
                 (connected != null ? "connected=" + connected + ", " : "") +
                 (reoccurring != null ? "reoccurring=" + reoccurring + ", " : "") +
+                (reoccurringType != null ? "reoccurringType=" + reoccurringType + ", " : "") +
                 (studentId != null ? "studentId=" + studentId + ", " : "") +
                 (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +

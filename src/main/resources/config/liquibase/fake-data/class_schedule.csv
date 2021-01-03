@@ -1,11 +1,11 @@
-id;name;created;schedule;updated;created_by;updated_by;confirmed_by_student;confirmed_by_teacher;comment;connected;reoccurring
-1;override systems;2020-12-16T03:43:39;2020-12-15T13:04:02;2020-12-15T16:37:03;fresh-thinking backing up open-source;iterate;mesh;grow Ergonomic Rubber Chips;Rustic;false;false
-2;Bike EXE multi-tasking;2020-12-15T23:50:00;2020-12-15T14:07:41;2020-12-16T04:36:43;help-desk Afghani azure;Brand stable Niger;open-source bypassing invoice;Data Frozen;South Dakota Iraqi Dinar Chicken;false;false
-3;wireless;2020-12-15T16:26:40;2020-12-16T05:20:04;2020-12-15T18:02:09;out-of-the-box;quantifying Seychelles Rupee;multimedia;Mobility;Optimization pixel deposit;false;false
-4;Unbranded copy;2020-12-15T15:35:18;2020-12-16T00:21:21;2020-12-16T09:16:29;transmit Specialist;Enhanced transmit;Cambridgeshire Legacy Unbranded;system-worthy Analyst;Home;false;false
-5;firmware;2020-12-15T12:57:46;2020-12-15T18:56:50;2020-12-15T19:11:38;visualize extensible;blue Human;Data Intelligent Wooden Mouse navigating;navigate;hack Surinam Dollar;true;false
-6;European Unit of Account 9(E.U.A.-9) Unbranded Granite Hat Tactics;2020-12-16T09:44:25;2020-12-16T03:17:09;2020-12-15T11:13:13;Chips Wooden;initiatives;bifurcated;Unions circuit;invoice;true;false
-7;Analyst niches sky blue;2020-12-15T18:16:27;2020-12-15T21:33:28;2020-12-15T17:14:20;Human 1080p;invoice;Borders Unbranded Washington;Chair;holistic Tasty;false;false
-8;magenta;2020-12-16T09:39:34;2020-12-16T05:53:47;2020-12-16T00:28:52;Borders;Orchestrator bypassing;Marshall Islands;Borders Tasty optical;withdrawal Cotton Research;false;false
-9;infrastructures quantifying;2020-12-15T22:52:27;2020-12-16T09:24:35;2020-12-15T17:51:44;Bond Markets Units European Composite Unit (EURCO);portal;bypass programming Bedfordshire;Meadows Intelligent Steel Computer Handmade;Manager;false;false
-10;Checking Account Rapids;2020-12-15T23:16:37;2020-12-15T13:27:51;2020-12-15T14:36:05;optical array bottom-line;withdrawal;Handmade Rubber Cheese Guinea-Bissau microchip;program;copy;true;false
+id;name;created;schedule;updated;created_by;updated_by;confirmed_by_student;confirmed_by_teacher;comment;payment;connected;reoccurring;reoccurring_type
+1;override systems;2020-12-16T03:43:39;2020-12-15T13:04:02;2020-12-15T16:37:03;fresh-thinking backing up open-source;iterate;mesh;grow Ergonomic Rubber Chips;Rustic;false;false;true;cyan
+2;multi-tasking Trail;2020-12-16T04:36:43;2020-12-15T15:43:00;2020-12-16T03:14:53;Afghani azure;Brand stable Niger;open-source bypassing invoice;Data Frozen;South Dakota Iraqi Dinar Chicken;false;false;false;neural Realigned
+3;out-of-the-box;2020-12-15T23:08:06;2020-12-15T14:59:37;2020-12-15T18:56:58;Convertible Marks multimedia Industrial;capacitor Buckinghamshire North Dakota;Practical;Unbranded copy;Cliff enterprise mobile;false;true;false;transmit
+4;Cambridgeshire Legacy Unbranded;2020-12-15T19:18:00;2020-12-16T04:48:58;2020-12-15T14:13:05;Bedfordshire Home implementation;firmware;New Leu Knoll Gourde US Dollar;Savings Account Unbranded;Chief primary yellow;false;true;false;navigate
+5;hack Surinam Dollar;2020-12-15T17:48:20;2020-12-16T10:09:06;2020-12-15T18:35:53;Senior Global Cambridgeshire;Incredible Frozen Tuna Chips;Concrete;Car bifurcated;Unions circuit;false;true;true;Unbranded Analyst niches
+6;Philippines;2020-12-15T21:33:28;2020-12-15T17:14:20;2020-12-15T22:35:24;Forward protocol invoice;Borders Unbranded Washington;Chair;holistic Tasty;Concrete;false;true;false;Court
+7;Investment Account Orchestrator;2020-12-15T15:08:00;2020-12-16T09:13:54;2020-12-16T06:08:20;Yemen Borders;Assistant;THX Creek web services;Gorgeous Cotton Shirt;quantifying;true;false;true;Bond Markets Units European Composite Unit (EURCO)
+8;portal;2020-12-15T13:16:41;2020-12-15T16:32:14;2020-12-16T08:34:54;Global Versatile Meadows;Ameliorated;Handmade;Manager;matrix;true;false;false;Cambridgeshire IB optical
+9;Gorgeous;2020-12-16T07:31:27;2020-12-16T06:18:44;2020-12-15T19:22:41;auxiliary quantify;Guinea-Bissau microchip Handmade;process improvement open system Meadow;interfaces Credit Card Account;Intranet mesh Personal Loan Account;true;true;false;Table web-enabled Implementation
+10;Nevada;2020-12-15T12:20:39;2020-12-15T16:36:51;2020-12-15T16:42:17;Australian Dollar;payment Unbranded Cotton Salad;Parkway Bedfordshire Research;Towels;invoice Burundi;false;true;false;Rustic Clothing

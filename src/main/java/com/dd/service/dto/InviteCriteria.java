@@ -29,6 +29,8 @@ public class InviteCriteria implements Serializable, Criteria {
 
     private StringFilter requestedUserId;
 
+    private StringFilter inviteCode;
+
     private StringFilter invitedUserId;
 
     private StringFilter createdBy;
@@ -45,6 +47,7 @@ public class InviteCriteria implements Serializable, Criteria {
     public InviteCriteria(InviteCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.requestedUserId = other.requestedUserId == null ? null : other.requestedUserId.copy();
+        this.inviteCode = other.inviteCode == null ? null : other.inviteCode.copy();
         this.invitedUserId = other.invitedUserId == null ? null : other.invitedUserId.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.created = other.created == null ? null : other.created.copy();
@@ -71,6 +74,14 @@ public class InviteCriteria implements Serializable, Criteria {
 
     public void setRequestedUserId(StringFilter requestedUserId) {
         this.requestedUserId = requestedUserId;
+    }
+
+    public StringFilter getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(StringFilter inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
     public StringFilter getInvitedUserId() {
@@ -126,6 +137,7 @@ public class InviteCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(requestedUserId, that.requestedUserId) &&
+            Objects.equals(inviteCode, that.inviteCode) &&
             Objects.equals(invitedUserId, that.invitedUserId) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(created, that.created) &&
@@ -138,6 +150,7 @@ public class InviteCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         requestedUserId,
+        inviteCode,
         invitedUserId,
         createdBy,
         created,
@@ -152,6 +165,7 @@ public class InviteCriteria implements Serializable, Criteria {
         return "InviteCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (requestedUserId != null ? "requestedUserId=" + requestedUserId + ", " : "") +
+                (inviteCode != null ? "inviteCode=" + inviteCode + ", " : "") +
                 (invitedUserId != null ? "invitedUserId=" + invitedUserId + ", " : "") +
                 (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
                 (created != null ? "created=" + created + ", " : "") +

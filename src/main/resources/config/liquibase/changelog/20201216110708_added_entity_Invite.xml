@@ -18,6 +18,9 @@
             <column name="requested_user_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="invite_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="invited_user_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -59,6 +62,7 @@
                   tableName="invite">
             <column name="id" type="numeric"/>
             <column name="requested_user_id" type="string"/>
+            <column name="invite_code" type="string"/>
             <column name="invited_user_id" type="string"/>
             <column name="created_by" type="string"/>
             <column name="created" type="datetime"/>

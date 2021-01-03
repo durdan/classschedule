@@ -172,6 +172,12 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
                 <AvField id="class-schedule-comment" type="text" name="comment" />
               </AvGroup>
               <AvGroup check>
+                <Label id="paymentLabel">
+                  <AvInput id="class-schedule-payment" type="checkbox" className="form-check-input" name="payment" />
+                  <Translate contentKey="classscheduleApp.classSchedule.payment">Payment</Translate>
+                </Label>
+              </AvGroup>
+              <AvGroup check>
                 <Label id="connectedLabel">
                   <AvInput id="class-schedule-connected" type="checkbox" className="form-check-input" name="connected" />
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate>
@@ -182,6 +188,12 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
                   <AvInput id="class-schedule-reoccurring" type="checkbox" className="form-check-input" name="reoccurring" />
                   <Translate contentKey="classscheduleApp.classSchedule.reoccurring">Reoccurring</Translate>
                 </Label>
+              </AvGroup>
+              <AvGroup>
+                <Label id="reoccurringTypeLabel" for="class-schedule-reoccurringType">
+                  <Translate contentKey="classscheduleApp.classSchedule.reoccurringType">Reoccurring Type</Translate>
+                </Label>
+                <AvField id="class-schedule-reoccurringType" type="text" name="reoccurringType" />
               </AvGroup>
               <AvGroup>
                 <Label for="class-schedule-student">

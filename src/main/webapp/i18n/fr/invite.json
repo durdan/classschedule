@@ -17,6 +17,7 @@
         "title": "Invite"
       },
       "requestedUserId": "Requested User Id",
+      "inviteCode": "Invite Code",
       "invitedUserId": "Invited User Id",
       "createdBy": "Created By",
       "created": "Created",

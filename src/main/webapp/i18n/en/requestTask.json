@@ -1,0 +1,30 @@
+{
+  "classscheduleApp": {
+    "requestTask": {
+      "home": {
+        "title": "Request Tasks",
+        "createLabel": "Create a new Request Task",
+        "createOrEditLabel": "Create or edit a Request Task",
+        "notFound": "No Request Tasks found"
+      },
+      "created": "A new Request Task is created with identifier {{ param }}",
+      "updated": "A Request Task is updated with identifier {{ param }}",
+      "deleted": "A Request Task is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Request Task {{ id }}?"
+      },
+      "detail": {
+        "title": "Request Task"
+      },
+      "requestedUserId": "Requested User Id",
+      "requestCode": "Request Code",
+      "requestType": "Request Type",
+      "requiredActionFromUserId": "Required Action From User Id",
+      "createdBy": "Created By",
+      "created": "Created",
+      "updated": "Updated",
+      "requestStatus": "Request Status",
+      "user": "User"
+    }
+  }
+}
