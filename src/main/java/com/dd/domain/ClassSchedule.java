@@ -54,6 +54,12 @@ public class ClassSchedule implements Serializable {
     @Column(name = "payment")
     private Boolean payment;
 
+    @Column(name = "confirmed")
+    private Boolean confirmed;
+
+    @Column(name = "rescheduled")
+    private Boolean rescheduled;
+
     @Column(name = "connected")
     private Boolean connected;
 
@@ -218,6 +224,32 @@ public class ClassSchedule implements Serializable {
         this.payment = payment;
     }
 
+    public Boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public ClassSchedule confirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+        return this;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public Boolean isRescheduled() {
+        return rescheduled;
+    }
+
+    public ClassSchedule rescheduled(Boolean rescheduled) {
+        this.rescheduled = rescheduled;
+        return this;
+    }
+
+    public void setRescheduled(Boolean rescheduled) {
+        this.rescheduled = rescheduled;
+    }
+
     public Boolean isConnected() {
         return connected;
     }
@@ -341,6 +373,8 @@ public class ClassSchedule implements Serializable {
             ", confirmedByTeacher='" + getConfirmedByTeacher() + "'" +
             ", comment='" + getComment() + "'" +
             ", payment='" + isPayment() + "'" +
+            ", confirmed='" + isConfirmed() + "'" +
+            ", rescheduled='" + isRescheduled() + "'" +
             ", connected='" + isConnected() + "'" +
             ", reoccurring='" + isReoccurring() + "'" +
             ", reoccurringType='" + getReoccurringType() + "'" +

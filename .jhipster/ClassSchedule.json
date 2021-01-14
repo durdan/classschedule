@@ -42,6 +42,14 @@
       "fieldType": "Boolean"
     },
     {
+      "fieldName": "confirmed",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "rescheduled",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "connected",
       "fieldType": "Boolean"
     },

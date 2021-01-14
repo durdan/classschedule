@@ -178,6 +178,18 @@ export const ClassScheduleUpdate = (props: IClassScheduleUpdateProps) => {
                 </Label>
               </AvGroup>
               <AvGroup check>
+                <Label id="confirmedLabel">
+                  <AvInput id="class-schedule-confirmed" type="checkbox" className="form-check-input" name="confirmed" />
+                  <Translate contentKey="classscheduleApp.classSchedule.confirmed">Confirmed</Translate>
+                </Label>
+              </AvGroup>
+              <AvGroup check>
+                <Label id="rescheduledLabel">
+                  <AvInput id="class-schedule-rescheduled" type="checkbox" className="form-check-input" name="rescheduled" />
+                  <Translate contentKey="classscheduleApp.classSchedule.rescheduled">Rescheduled</Translate>
+                </Label>
+              </AvGroup>
+              <AvGroup check>
                 <Label id="connectedLabel">
                   <AvInput id="class-schedule-connected" type="checkbox" className="form-check-input" name="connected" />
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate>

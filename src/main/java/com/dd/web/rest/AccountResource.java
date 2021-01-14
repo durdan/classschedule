@@ -193,12 +193,12 @@ public class AccountResource {
                     userExtraDTO.setUserId(student.get().getId());
                 }
             }
-//            if(userExtra.get().getUserType().equals(UserType.TEACHER.name())){
-//                Optional<Teacher> teacher= teacherService.findOneWithEmail(userDTO.getEmail());
-//                if(student.isPresent()){
-//                    userExtraDTO.setUserId(student.get().getId());
-//                }
-//            }
+            if(userExtra.get().getUserType().equals(UserType.TEACHER.name())){
+                Optional<Teacher> teacher= teacherService.findOneWithEmail(userDTO.getEmail());
+                if(teacher.isPresent()){
+                    userExtraDTO.setUserId(teacher.get().getId());
+                }
+            }
 
 
         }

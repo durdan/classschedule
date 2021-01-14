@@ -1,5 +1,6 @@
 package com.dd.service;
 
+import com.dd.domain.Student;
 import com.dd.domain.Teacher;
 
 import org.springframework.data.domain.Page;
@@ -36,6 +37,15 @@ public interface TeacherService {
      * @return the entity.
      */
     Optional<Teacher> findOne(Long id);
+
+    /**
+     * Get the "id" userExtra.
+     *
+     * @param email the id of the entity.
+     * @return the entity.
+     */
+    Optional<Teacher> findOneWithEmail(String email);
+
 
     /**
      * Delete the "id" teacher.

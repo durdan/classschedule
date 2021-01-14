@@ -16,6 +16,8 @@ export interface IClassSchedule {
   confirmedByTeacher?: string;
   comment?: string;
   payment?: boolean;
+  confirmed?: boolean;
+  rescheduled?: boolean;
   connected?: boolean;
   reoccurring?: boolean;
   reoccurringType?: string;
@@ -27,6 +29,8 @@ export interface IClassSchedule {
 
 export const defaultValue: Readonly<IClassSchedule> = {
   payment: false,
+  confirmed: false,
+  rescheduled: false,
   connected: false,
   reoccurring: false,
 };

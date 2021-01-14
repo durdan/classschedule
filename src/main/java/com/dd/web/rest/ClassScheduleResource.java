@@ -68,7 +68,7 @@ public class ClassScheduleResource {
         ClassSchedule result=null;
         if (classSchedule.getReoccurringType()!=null){
             ZonedDateTime d = ZonedDateTime.parse(classSchedule.getSchedule().toString());
-           List<LocalDateTime> localDates= getWeeklyMeetingDates(d.toLocalDateTime(),5,classSchedule.getReoccurringType());
+           List<LocalDateTime> localDates= getWeeklyMeetingDates(d.toLocalDateTime(),26,classSchedule.getReoccurringType());
             for (LocalDateTime localDateTime : localDates){
                 ClassSchedule classSchedule1 = new ClassSchedule();
                 classSchedule1 = classSchedule;

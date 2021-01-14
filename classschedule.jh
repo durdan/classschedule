@@ -109,6 +109,8 @@ confirmedByStudent String,
 confirmedByTeacher String,
 comment String,
 payment Boolean,
+confirmed Boolean,
+rescheduled Boolean,
 connected Boolean,
 reoccurring Boolean,
 reoccurringType String

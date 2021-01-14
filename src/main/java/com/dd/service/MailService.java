@@ -77,6 +77,9 @@ public class MailService {
             log.debug("Email doesn't exist for user '{}'", user.getLogin());
             return;
         }
+        if(user.getLangKey()==null){
+            user.setLangKey("en");
+        }
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
         context.setVariable(USER, user);

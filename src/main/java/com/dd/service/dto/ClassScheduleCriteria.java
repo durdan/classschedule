@@ -47,6 +47,10 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
 
     private BooleanFilter payment;
 
+    private BooleanFilter confirmed;
+
+    private BooleanFilter rescheduled;
+
     private BooleanFilter connected;
 
     private BooleanFilter reoccurring;
@@ -76,6 +80,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.confirmedByTeacher = other.confirmedByTeacher == null ? null : other.confirmedByTeacher.copy();
         this.comment = other.comment == null ? null : other.comment.copy();
         this.payment = other.payment == null ? null : other.payment.copy();
+        this.confirmed = other.confirmed == null ? null : other.confirmed.copy();
+        this.rescheduled = other.rescheduled == null ? null : other.rescheduled.copy();
         this.connected = other.connected == null ? null : other.connected.copy();
         this.reoccurring = other.reoccurring == null ? null : other.reoccurring.copy();
         this.reoccurringType = other.reoccurringType == null ? null : other.reoccurringType.copy();
@@ -178,6 +184,22 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         this.payment = payment;
     }
 
+    public BooleanFilter getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(BooleanFilter confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public BooleanFilter getRescheduled() {
+        return rescheduled;
+    }
+
+    public void setRescheduled(BooleanFilter rescheduled) {
+        this.rescheduled = rescheduled;
+    }
+
     public BooleanFilter getConnected() {
         return connected;
     }
@@ -256,6 +278,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
             Objects.equals(confirmedByTeacher, that.confirmedByTeacher) &&
             Objects.equals(comment, that.comment) &&
             Objects.equals(payment, that.payment) &&
+            Objects.equals(confirmed, that.confirmed) &&
+            Objects.equals(rescheduled, that.rescheduled) &&
             Objects.equals(connected, that.connected) &&
             Objects.equals(reoccurring, that.reoccurring) &&
             Objects.equals(reoccurringType, that.reoccurringType) &&
@@ -279,6 +303,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
         confirmedByTeacher,
         comment,
         payment,
+        confirmed,
+        rescheduled,
         connected,
         reoccurring,
         reoccurringType,
@@ -304,6 +330,8 @@ public class ClassScheduleCriteria implements Serializable, Criteria {
                 (confirmedByTeacher != null ? "confirmedByTeacher=" + confirmedByTeacher + ", " : "") +
                 (comment != null ? "comment=" + comment + ", " : "") +
                 (payment != null ? "payment=" + payment + ", " : "") +
+                (confirmed != null ? "confirmed=" + confirmed + ", " : "") +
+                (rescheduled != null ? "rescheduled=" + rescheduled + ", " : "") +
                 (connected != null ? "connected=" + connected + ", " : "") +
                 (reoccurring != null ? "reoccurring=" + reoccurring + ", " : "") +
                 (reoccurringType != null ? "reoccurringType=" + reoccurringType + ", " : "") +

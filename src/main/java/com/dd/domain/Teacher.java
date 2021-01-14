@@ -229,21 +229,19 @@ public class Teacher implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Teacher{" +
-            "id=" + id +
-            ", profileContent='" + profileContent + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", phone='" + phone + '\'' +
-            ", createdBy='" + createdBy + '\'' +
-            ", created=" + created +
-            ", updated=" + updated +
-            ", user=" + user +
-            ", parent=" + parent +
-            ", student=" + student +
-            '}';
+            "id=" + getId() +
+            ", profileContent='" + getProfileContent() + "'" +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", created='" + getCreated() + "'" +
+            ", updated='" + getUpdated() + "'" +
+            "}";
     }
 }

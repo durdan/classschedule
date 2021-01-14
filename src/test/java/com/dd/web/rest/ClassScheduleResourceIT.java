@@ -68,6 +68,12 @@ public class ClassScheduleResourceIT {
     private static final Boolean DEFAULT_PAYMENT = false;
     private static final Boolean UPDATED_PAYMENT = true;
 
+    private static final Boolean DEFAULT_CONFIRMED = false;
+    private static final Boolean UPDATED_CONFIRMED = true;
+
+    private static final Boolean DEFAULT_RESCHEDULED = false;
+    private static final Boolean UPDATED_RESCHEDULED = true;
+
     private static final Boolean DEFAULT_CONNECTED = false;
     private static final Boolean UPDATED_CONNECTED = true;
 
@@ -112,6 +118,8 @@ public class ClassScheduleResourceIT {
             .confirmedByTeacher(DEFAULT_CONFIRMED_BY_TEACHER)
             .comment(DEFAULT_COMMENT)
             .payment(DEFAULT_PAYMENT)
+            .confirmed(DEFAULT_CONFIRMED)
+            .rescheduled(DEFAULT_RESCHEDULED)
             .connected(DEFAULT_CONNECTED)
             .reoccurring(DEFAULT_REOCCURRING)
             .reoccurringType(DEFAULT_REOCCURRING_TYPE);
@@ -135,6 +143,8 @@ public class ClassScheduleResourceIT {
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
             .payment(UPDATED_PAYMENT)
+            .confirmed(UPDATED_CONFIRMED)
+            .rescheduled(UPDATED_RESCHEDULED)
             .connected(UPDATED_CONNECTED)
             .reoccurring(UPDATED_REOCCURRING)
             .reoccurringType(UPDATED_REOCCURRING_TYPE);
@@ -170,6 +180,8 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(DEFAULT_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testClassSchedule.isPayment()).isEqualTo(DEFAULT_PAYMENT);
+        assertThat(testClassSchedule.isConfirmed()).isEqualTo(DEFAULT_CONFIRMED);
+        assertThat(testClassSchedule.isRescheduled()).isEqualTo(DEFAULT_RESCHEDULED);
         assertThat(testClassSchedule.isConnected()).isEqualTo(DEFAULT_CONNECTED);
         assertThat(testClassSchedule.isReoccurring()).isEqualTo(DEFAULT_REOCCURRING);
         assertThat(testClassSchedule.getReoccurringType()).isEqualTo(DEFAULT_REOCCURRING_TYPE);
@@ -216,6 +228,8 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
             .andExpect(jsonPath("$.[*].payment").value(hasItem(DEFAULT_PAYMENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())))
+            .andExpect(jsonPath("$.[*].rescheduled").value(hasItem(DEFAULT_RESCHEDULED.booleanValue())))
             .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
             .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())))
             .andExpect(jsonPath("$.[*].reoccurringType").value(hasItem(DEFAULT_REOCCURRING_TYPE)));
@@ -242,6 +256,8 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.confirmedByTeacher").value(DEFAULT_CONFIRMED_BY_TEACHER))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT))
             .andExpect(jsonPath("$.payment").value(DEFAULT_PAYMENT.booleanValue()))
+            .andExpect(jsonPath("$.confirmed").value(DEFAULT_CONFIRMED.booleanValue()))
+            .andExpect(jsonPath("$.rescheduled").value(DEFAULT_RESCHEDULED.booleanValue()))
             .andExpect(jsonPath("$.connected").value(DEFAULT_CONNECTED.booleanValue()))
             .andExpect(jsonPath("$.reoccurring").value(DEFAULT_REOCCURRING.booleanValue()))
             .andExpect(jsonPath("$.reoccurringType").value(DEFAULT_REOCCURRING_TYPE));
@@ -945,6 +961,110 @@ public class ClassScheduleResourceIT {
 
     @Test
     @Transactional
+    public void getAllClassSchedulesByConfirmedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where confirmed equals to DEFAULT_CONFIRMED
+        defaultClassScheduleShouldBeFound("confirmed.equals=" + DEFAULT_CONFIRMED);
+
+        // Get all the classScheduleList where confirmed equals to UPDATED_CONFIRMED
+        defaultClassScheduleShouldNotBeFound("confirmed.equals=" + UPDATED_CONFIRMED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByConfirmedIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where confirmed not equals to DEFAULT_CONFIRMED
+        defaultClassScheduleShouldNotBeFound("confirmed.notEquals=" + DEFAULT_CONFIRMED);
+
+        // Get all the classScheduleList where confirmed not equals to UPDATED_CONFIRMED
+        defaultClassScheduleShouldBeFound("confirmed.notEquals=" + UPDATED_CONFIRMED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByConfirmedIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where confirmed in DEFAULT_CONFIRMED or UPDATED_CONFIRMED
+        defaultClassScheduleShouldBeFound("confirmed.in=" + DEFAULT_CONFIRMED + "," + UPDATED_CONFIRMED);
+
+        // Get all the classScheduleList where confirmed equals to UPDATED_CONFIRMED
+        defaultClassScheduleShouldNotBeFound("confirmed.in=" + UPDATED_CONFIRMED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByConfirmedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where confirmed is not null
+        defaultClassScheduleShouldBeFound("confirmed.specified=true");
+
+        // Get all the classScheduleList where confirmed is null
+        defaultClassScheduleShouldNotBeFound("confirmed.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByRescheduledIsEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where rescheduled equals to DEFAULT_RESCHEDULED
+        defaultClassScheduleShouldBeFound("rescheduled.equals=" + DEFAULT_RESCHEDULED);
+
+        // Get all the classScheduleList where rescheduled equals to UPDATED_RESCHEDULED
+        defaultClassScheduleShouldNotBeFound("rescheduled.equals=" + UPDATED_RESCHEDULED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByRescheduledIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where rescheduled not equals to DEFAULT_RESCHEDULED
+        defaultClassScheduleShouldNotBeFound("rescheduled.notEquals=" + DEFAULT_RESCHEDULED);
+
+        // Get all the classScheduleList where rescheduled not equals to UPDATED_RESCHEDULED
+        defaultClassScheduleShouldBeFound("rescheduled.notEquals=" + UPDATED_RESCHEDULED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByRescheduledIsInShouldWork() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where rescheduled in DEFAULT_RESCHEDULED or UPDATED_RESCHEDULED
+        defaultClassScheduleShouldBeFound("rescheduled.in=" + DEFAULT_RESCHEDULED + "," + UPDATED_RESCHEDULED);
+
+        // Get all the classScheduleList where rescheduled equals to UPDATED_RESCHEDULED
+        defaultClassScheduleShouldNotBeFound("rescheduled.in=" + UPDATED_RESCHEDULED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllClassSchedulesByRescheduledIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        classScheduleRepository.saveAndFlush(classSchedule);
+
+        // Get all the classScheduleList where rescheduled is not null
+        defaultClassScheduleShouldBeFound("rescheduled.specified=true");
+
+        // Get all the classScheduleList where rescheduled is null
+        defaultClassScheduleShouldNotBeFound("rescheduled.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllClassSchedulesByConnectedIsEqualToSomething() throws Exception {
         // Initialize the database
         classScheduleRepository.saveAndFlush(classSchedule);
@@ -1222,6 +1342,8 @@ public class ClassScheduleResourceIT {
             .andExpect(jsonPath("$.[*].confirmedByTeacher").value(hasItem(DEFAULT_CONFIRMED_BY_TEACHER)))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
             .andExpect(jsonPath("$.[*].payment").value(hasItem(DEFAULT_PAYMENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].confirmed").value(hasItem(DEFAULT_CONFIRMED.booleanValue())))
+            .andExpect(jsonPath("$.[*].rescheduled").value(hasItem(DEFAULT_RESCHEDULED.booleanValue())))
             .andExpect(jsonPath("$.[*].connected").value(hasItem(DEFAULT_CONNECTED.booleanValue())))
             .andExpect(jsonPath("$.[*].reoccurring").value(hasItem(DEFAULT_REOCCURRING.booleanValue())))
             .andExpect(jsonPath("$.[*].reoccurringType").value(hasItem(DEFAULT_REOCCURRING_TYPE)));
@@ -1281,6 +1403,8 @@ public class ClassScheduleResourceIT {
             .confirmedByTeacher(UPDATED_CONFIRMED_BY_TEACHER)
             .comment(UPDATED_COMMENT)
             .payment(UPDATED_PAYMENT)
+            .confirmed(UPDATED_CONFIRMED)
+            .rescheduled(UPDATED_RESCHEDULED)
             .connected(UPDATED_CONNECTED)
             .reoccurring(UPDATED_REOCCURRING)
             .reoccurringType(UPDATED_REOCCURRING_TYPE);
@@ -1304,6 +1428,8 @@ public class ClassScheduleResourceIT {
         assertThat(testClassSchedule.getConfirmedByTeacher()).isEqualTo(UPDATED_CONFIRMED_BY_TEACHER);
         assertThat(testClassSchedule.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testClassSchedule.isPayment()).isEqualTo(UPDATED_PAYMENT);
+        assertThat(testClassSchedule.isConfirmed()).isEqualTo(UPDATED_CONFIRMED);
+        assertThat(testClassSchedule.isRescheduled()).isEqualTo(UPDATED_RESCHEDULED);
         assertThat(testClassSchedule.isConnected()).isEqualTo(UPDATED_CONNECTED);
         assertThat(testClassSchedule.isReoccurring()).isEqualTo(UPDATED_REOCCURRING);
         assertThat(testClassSchedule.getReoccurringType()).isEqualTo(UPDATED_REOCCURRING_TYPE);

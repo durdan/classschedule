@@ -26,6 +26,8 @@
       "confirmedByTeacher": "Confirmed By Teacher",
       "comment": "Comment",
       "payment": "Payment",
+      "confirmed": "Confirmed",
+      "rescheduled": "Rescheduled",
       "connected": "Connected",
       "reoccurring": "Reoccurring",
       "reoccurringType": "Reoccurring Type",

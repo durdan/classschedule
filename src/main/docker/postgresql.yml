@@ -5,8 +5,9 @@ services:
     # volumes:
     #     - ~/volumes/jhipster/classschedule/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=classschedule
-      - POSTGRES_PASSWORD=
-      - POSTGRES_HOST_AUTH_METHOD=trust
+     - POSTGRES_USER=classschedule
+     - POSTGRES_PASSWORD=classschedule
+     - POSTGRES_HOST_AUTH_METHOD=trust
+
     ports:
       - 5432:5432

@@ -115,6 +115,12 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                 <th className="hand" onClick={sort('payment')}>
                   <Translate contentKey="classscheduleApp.classSchedule.payment">Payment</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('confirmed')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.confirmed">Confirmed</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('rescheduled')}>
+                  <Translate contentKey="classscheduleApp.classSchedule.rescheduled">Rescheduled</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('connected')}>
                   <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -164,6 +170,8 @@ export const ClassSchedule = (props: IClassScheduleProps) => {
                   <td>{classSchedule.confirmedByTeacher}</td>
                   <td>{classSchedule.comment}</td>
                   <td>{classSchedule.payment ? 'true' : 'false'}</td>
+                  <td>{classSchedule.confirmed ? 'true' : 'false'}</td>
+                  <td>{classSchedule.rescheduled ? 'true' : 'false'}</td>
                   <td>{classSchedule.connected ? 'true' : 'false'}</td>
                   <td>{classSchedule.reoccurring ? 'true' : 'false'}</td>
                   <td>{classSchedule.reoccurringType}</td>

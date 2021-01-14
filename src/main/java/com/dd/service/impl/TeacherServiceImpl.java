@@ -50,6 +50,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public Optional<Teacher> findOneWithEmail(String email) {
+        log.debug("Request to get Teacher by email : {}", email);
+        return teacherRepository.findByTeacherByEmail(email);
+
+    }
+
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete Teacher : {}", id);
         teacherRepository.deleteById(id);

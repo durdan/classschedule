@@ -92,6 +92,18 @@ export const ClassScheduleDetail = (props: IClassScheduleDetailProps) => {
           </dt>
           <dd>{classScheduleEntity.payment ? 'true' : 'false'}</dd>
           <dt>
+            <span id="confirmed">
+              <Translate contentKey="classscheduleApp.classSchedule.confirmed">Confirmed</Translate>
+            </span>
+          </dt>
+          <dd>{classScheduleEntity.confirmed ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="rescheduled">
+              <Translate contentKey="classscheduleApp.classSchedule.rescheduled">Rescheduled</Translate>
+            </span>
+          </dt>
+          <dd>{classScheduleEntity.rescheduled ? 'true' : 'false'}</dd>
+          <dt>
             <span id="connected">
               <Translate contentKey="classscheduleApp.classSchedule.connected">Connected</Translate>
             </span>

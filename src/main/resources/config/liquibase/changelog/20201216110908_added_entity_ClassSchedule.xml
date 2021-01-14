@@ -45,6 +45,12 @@
             <column name="payment" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="confirmed" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="rescheduled" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="connected" type="boolean">
                 <constraints nullable="true" />
             </column>
@@ -102,6 +108,8 @@
             <column name="confirmed_by_teacher" type="string"/>
             <column name="comment" type="string"/>
             <column name="payment" type="boolean"/>
+            <column name="confirmed" type="boolean"/>
+            <column name="rescheduled" type="boolean"/>
             <column name="connected" type="boolean"/>
             <column name="reoccurring" type="boolean"/>
             <column name="reoccurring_type" type="string"/>
